@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 
 # Enable debug symbols by default
 # must be done before project() statement
@@ -25,6 +25,16 @@ add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
 	"${PROJECT_SOURCE_DIR}/assets"
 	$<TARGET_FILE_DIR:${EXEC_NAME}>/assets)
-
-
+	
+#automatically copy SFML .dlls to binary directory if they haven't been copied yet
+set(SFML_BIN_DIR ${SFML_INCLUDE_DIR}/../bin)
+add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-audio-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-graphics-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-network-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-system-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-window-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
+)	
+	
+	
 install(TARGETS ${EXEC_NAME} DESTINATION bin)
