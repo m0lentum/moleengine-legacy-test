@@ -8,6 +8,10 @@ endif()
 
 project(METestGame)
 
+# Build the MoleEngine library
+set(ME_SOURCE_ROOT ../MoleEngine CACHE PATH "Path to the root directory of the MoleEngine source")
+add_subdirectory(${ME_SOURCE_ROOT} engine)
+
 # Find sources, add necessary includes and define the executable
 set(EXEC_NAME "METest")
 file(GLOB SOURCES src/*.cpp)
