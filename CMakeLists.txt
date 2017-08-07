@@ -27,14 +27,16 @@ add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
 	$<TARGET_FILE_DIR:${EXEC_NAME}>/assets)
 	
 #automatically copy SFML .dlls to binary directory if they haven't been copied yet
-set(SFML_BIN_DIR ${SFML_INCLUDE_DIR}/../bin)
+set(SFML_BIN_DIR "" CACHE PATH "Path to the SFML .dlls for automatic copying")
+if(SFML_BIN_DIR)
 add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-audio-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-graphics-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-network-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-system-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SFML_BIN_DIR}/sfml-window-$<$<CONFIG:Debug>:d->2.dll $<TARGET_FILE_DIR:${EXEC_NAME}>
-)	
+)
+endif()
 	
 	
 install(TARGETS ${EXEC_NAME} DESTINATION bin)
