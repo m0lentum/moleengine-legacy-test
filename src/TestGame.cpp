@@ -1,4 +1,5 @@
 #include "TestGame.hpp"
+#include <iostream>
 
 namespace tg
 {
@@ -6,18 +7,22 @@ namespace tg
 	{
 		m_title = "MoleEngine test game";
 		createWindow(800, 600);
-		//m_mainWindow.setFramerateLimit(60);
+		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f); //120fps
 
 		Game::begin();
 	}
 
-	void TestGame::update(sf::Time timeElapsed)
+	void TestGame::continuousUpdate(sf::Time timeElapsed)
+	{
+		anim.continuousUpdate(timeElapsed);
+	}
+
+	void TestGame::fixedUpdate()
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) m_view.zoom(0.95f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_view.move(2.0f, 0.5f);
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) m_view.move(-2.0f, -0.5f);
 
-		anim.update(timeElapsed);
 		anim.rotate(2);
 	}
 

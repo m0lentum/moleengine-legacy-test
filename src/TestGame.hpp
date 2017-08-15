@@ -19,7 +19,8 @@ namespace tg
 		me::AnimatedSprite anim;
 		sf::Texture mainTexture;
 
-		virtual void update(sf::Time timeElapsed);
+		virtual void continuousUpdate(sf::Time timeElapsed);
+		virtual void fixedUpdate();
 		virtual void draw();
 
 	};
