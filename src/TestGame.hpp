@@ -2,6 +2,7 @@
 #define TEST_GAME_HPP
 
 #include <ME/Game.hpp>
+#include <ME/GameObject.hpp>
 #include <ME/AnimatedSprite.hpp>
 
 namespace tg
@@ -16,7 +17,7 @@ namespace tg
 
 	private:
 
-		me::AnimatedSprite anim;
+		me::GameObject obj;
 		sf::Texture mainTexture;
 
 		virtual void continuousUpdate(sf::Time timeElapsed);
