@@ -3,7 +3,6 @@
 
 #include <ME/Game.hpp>
 #include <ME/AnimatedSprite.hpp>
-#include <ME/GameObject.hpp>
 
 namespace tg
 {
@@ -17,12 +16,11 @@ namespace tg
 
 	private:
 
-		me::GameObjectAnimated objAnim;
-		me::GameObjectStatic objStatic;
+		me::AnimatedSprite anim;
 		sf::Texture mainTexture;
 
-		void update();
-		void draw();
+		virtual void update(sf::Time timeElapsed);
+		virtual void draw();
 
 	};
 }

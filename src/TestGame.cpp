@@ -4,40 +4,36 @@ namespace tg
 {
 	void TestGame::begin()
 	{
-		title = "MoleEngine test game";
+		m_title = "MoleEngine test game";
 		createWindow(800, 600);
-		mainWindow.setFramerateLimit(60);
+		//m_mainWindow.setFramerateLimit(60);
 
 		Game::begin();
 	}
 
-	void TestGame::update()
+	void TestGame::update(sf::Time timeElapsed)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) view.zoom(0.95f);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) view.move(2.0f, 0.5f);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) view.move(-2.0f, -0.5f);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) m_view.zoom(0.95f);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_view.move(2.0f, 0.5f);
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) m_view.move(-2.0f, -0.5f);
 
-		objAnim.update();
-		objAnim.rotate(2);
+		anim.update(timeElapsed);
+		anim.rotate(2);
 	}
 
 	void TestGame::draw()
 	{
-		mainWindow.clear(sf::Color::Cyan);
-		mainWindow.setView(view);
-		mainWindow.draw(objAnim);
-		mainWindow.draw(objStatic);
-		mainWindow.display();
+		m_mainWindow.clear(sf::Color::Cyan);
+		m_mainWindow.setView(m_view);
+		m_mainWindow.draw(anim);
+		m_mainWindow.display();
 	}
 
 	TestGame::TestGame() :
-		objAnim(me::AnimatedSprite(mainTexture, sf::Vector2i(), sf::Vector2i(100, 100), 5, 10)),
-		objStatic(new sf::CircleShape(100.0f))
+		anim(&mainTexture, sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(200))
 	{
 		mainTexture.loadFromFile("assets/Sprite-0001.png");
-		objAnim.setOrigin(50, 50);
-		objAnim.setPosition(200, 300);
-		objStatic.setOrigin(50, 50);
-		objStatic.setPosition(400, 300);
+		anim.setOrigin(50, 50);
+		anim.setPosition(200, 300);
 	}
 }
