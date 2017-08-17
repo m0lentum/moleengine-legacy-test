@@ -1,5 +1,6 @@
 #include "TestGame.hpp"
 #include <iostream>
+#include "States\StatePlaying.hpp"
 
 namespace tg
 {
@@ -9,12 +10,15 @@ namespace tg
 		createWindow(800, 600);
 		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f); //120fps
 
+		m_stateManager.addState("PLAYING", new StatePlaying());
+		m_stateManager.transitionTo("PLAYING");
+
 		Game::begin();
 	}
 
 	void TestGame::continuousUpdate(sf::Time timeElapsed)
 	{
-		obj.continuousUpdate(timeElapsed);
+		m_stateManager.continuousUpdate(timeElapsed);
 	}
 
 	void TestGame::fixedUpdate()
@@ -23,22 +27,24 @@ namespace tg
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_view.move(2.0f, 0.5f);
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) m_view.move(-2.0f, -0.5f);
 
-		obj.rotate(2);
+		m_stateManager.fixedUpdate();
 	}
 
 	void TestGame::draw()
 	{
 		m_mainWindow.clear(sf::Color::Cyan);
-		m_mainWindow.setView(m_view);
-		m_mainWindow.draw(obj);
+		m_mainWindow.setView(m_view); //TODO move this to the state and only update it when it has changed
+		
+		m_stateManager.draw(m_mainWindow, sf::RenderStates());
+
 		m_mainWindow.display();
 	}
 
-	TestGame::TestGame() :
-		obj(new me::AnimatedSprite(&mainTexture, sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(200)))
+	TestGame::TestGame()
 	{
-		mainTexture.loadFromFile("assets/Sprite-0001.png");
-		obj.setOrigin(50, 50);
-		obj.setPosition(200, 300);
+	}
+
+	TestGame::~TestGame()
+	{
 	}
 }

@@ -14,7 +14,7 @@ add_subdirectory(${ME_SOURCE_ROOT} engine)
 
 # Find sources, add necessary includes and define the executable
 set(EXEC_NAME "METest")
-file(GLOB SOURCES src/*.cpp)
+file(GLOB_RECURSE SOURCES src/*.cpp)
 include_directories(${MoleEngine_INCLUDE_DIRS})
 add_executable(${EXEC_NAME} ${SOURCES})
 

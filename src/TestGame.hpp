@@ -10,16 +10,12 @@ namespace tg
 	class TestGame : public me::Game
 	{
 	public:
-
-		void begin();
+		virtual void begin();
 
 		TestGame();
+		~TestGame();
 
 	private:
-
-		me::GameObject obj;
-		sf::Texture mainTexture;
-
 		virtual void continuousUpdate(sf::Time timeElapsed);
 		virtual void fixedUpdate();
 		virtual void draw();
