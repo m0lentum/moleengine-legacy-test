@@ -13,6 +13,9 @@ namespace tg
 		sf::Texture m_mainTexture;
 
 	public:
+	  virtual void onTransitionIn();
+	  virtual void onTransitionOut();
+	  
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
 		virtual void fixedUpdate();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

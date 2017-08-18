@@ -1,10 +1,21 @@
 #include "StatePlaying.hpp"
 #include <ME/AnimatedSprite.hpp>
 #include <SFML/System/Vector2.hpp>
-//#include <iostream>
+#include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 
 namespace tg
 {
+  void StatePlaying::onTransitionIn()
+  {
+    std::cout << "Transition into StatePlaying" << std::endl;
+  }
+
+  void StatePlaying::onTransitionOut()
+  {
+    std::cout << "Transition out of StatePlaying" << std::endl;
+  }
+  
 	void StatePlaying::continuousUpdate(const sf::Time &timeElapsed)
 	{
 		m_obj.continuousUpdate(timeElapsed);
@@ -13,6 +24,7 @@ namespace tg
 	void StatePlaying::fixedUpdate()
 	{
 		m_obj.rotate(2);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) m_manager->transitionTo("PAUSED");
 	}
 
 	void StatePlaying::draw(sf::RenderTarget& target, sf::RenderStates states) const

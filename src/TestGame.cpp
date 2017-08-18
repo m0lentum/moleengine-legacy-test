@@ -1,6 +1,7 @@
 #include "TestGame.hpp"
 #include <iostream>
-#include "States\StatePlaying.hpp"
+#include "States/StatePlaying.hpp"
+#include "States/StatePaused.hpp"
 
 namespace tg
 {
@@ -12,7 +13,8 @@ namespace tg
 
 		m_stateManager.addState("PLAYING", new StatePlaying());
 		m_stateManager.transitionTo("PLAYING");
-
+		m_stateManager.addState("PAUSED", new StatePaused());
+		
 		Game::begin();
 	}
 
@@ -23,7 +25,6 @@ namespace tg
 
 	void TestGame::fixedUpdate()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) m_view.zoom(0.95f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_view.move(2.0f, 0.5f);
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) m_view.move(-2.0f, -0.5f);
 
