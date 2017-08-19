@@ -25,16 +25,12 @@ namespace tg
 
 	void TestGame::fixedUpdate()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_view.move(2.0f, 0.5f);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) m_view.move(-2.0f, -0.5f);
-
 		m_stateManager.fixedUpdate();
 	}
 
 	void TestGame::draw()
 	{
 		m_mainWindow.clear(sf::Color::Cyan);
-		m_mainWindow.setView(m_view); //TODO move this to the state and only update it when it has changed
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
 
