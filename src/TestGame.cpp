@@ -11,8 +11,15 @@ namespace tg
 		createWindow(800, 600);
 		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f); //120fps
 
-		m_stateManager.addState("PLAYING", new StatePlaying());
-		m_stateManager.addState("PAUSED", new StatePaused());
+		StatePlaying* playing = new StatePlaying();
+		playing->registerAssetManager(&m_assetManager);
+		m_stateManager.addState("PLAYING", playing);
+		playing->load(); //TODO this is a clumsy way to setup the states, figure out something better
+		
+		StatePaused* paused = new StatePaused();
+		paused->registerAssetManager(&m_assetManager);
+		m_stateManager.addState("PAUSED", paused);
+		paused->load();
 		
 		Game::begin();
 	}
