@@ -12,7 +12,6 @@ namespace tg
 		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f); //120fps
 
 		m_stateManager.addState("PLAYING", new StatePlaying());
-		m_stateManager.transitionTo("PLAYING");
 		m_stateManager.addState("PAUSED", new StatePaused());
 		
 		Game::begin();
