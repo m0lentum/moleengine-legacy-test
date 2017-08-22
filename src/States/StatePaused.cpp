@@ -1,6 +1,6 @@
 #include "StatePaused.hpp"
 #include <SFML/Window/Keyboard.hpp>
-#include <ME/AnimatedSprite.hpp>
+#include <ME/Graphics/AnimatedSprite.hpp>
 
 namespace tg
 {

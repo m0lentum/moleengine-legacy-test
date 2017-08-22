@@ -1,5 +1,5 @@
 #include "StatePlaying.hpp"
-#include <ME/AnimatedSprite.hpp>
+#include <ME/Graphics/AnimatedSprite.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>

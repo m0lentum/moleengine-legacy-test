@@ -3,7 +3,7 @@
 
 #include <ME/Game.hpp>
 #include <ME/GameObject.hpp>
-#include <ME/AnimatedSprite.hpp>
+#include <ME/Graphics/AnimatedSprite.hpp>
 
 namespace tg
 {
