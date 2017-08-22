@@ -1,14 +1,14 @@
 #include "StatePaused.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <ME/Graphics/AnimatedSprite.hpp>
+#include "StatePlaying.hpp"
+//#include <iostream>
 
 namespace tg
 {
-	void StatePaused::load()
+	void StatePaused::loadSpace(std::shared_ptr<me::Space> space)
 	{
-		m_obj = me::GameObject(new me::AnimatedSprite(m_assetManager->getTexture("Sprite0001"), sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(200)));
-		m_obj.setOrigin(50, 50);
-		m_obj.setPosition(200, 300);
+		m_space = space;
 	}
 
 	void StatePaused::continuousUpdate(const sf::Time &timeElapsed)
@@ -26,16 +26,14 @@ namespace tg
 
 	void StatePaused::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		target.draw(m_obj, states);
+		m_space->draw(target, states);
 	}
 
 	StatePaused::StatePaused()
 	{
-
 	}
 
 	StatePaused::~StatePaused()
 	{
-
 	}
 }

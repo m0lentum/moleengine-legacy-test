@@ -2,17 +2,18 @@
 #define STATE_PLAYING_HPP
 
 #include <ME/GameStateManager.hpp>
-#include <ME/GameObject.hpp>
+#include <ME/Space.hpp>
 
 namespace tg
 {
 	class StatePlaying : public me::GameState
 	{
 	private:
-		me::GameObject m_obj;
+		std::shared_ptr<me::Space> m_space;
 		sf::View m_view;
+
 	public:
-		void load();
+		void loadSpace(std::shared_ptr<me::Space> space);
 
 		virtual void onTransitionIn();
 		virtual void onTransitionOut();

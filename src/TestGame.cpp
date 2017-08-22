@@ -2,6 +2,8 @@
 #include <iostream>
 #include "States/StatePlaying.hpp"
 #include "States/StatePaused.hpp"
+#include <ME/Space.hpp>
+#include "Objects/ObjTest.hpp"
 
 namespace tg
 {
@@ -11,16 +13,22 @@ namespace tg
 		createWindow(800, 600);
 		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f); //120fps
 
-		StatePlaying* playing = new StatePlaying();
+		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
+
+		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
+		space->addObject(new ObjTest(&m_assetManager));
+
+		//Setup the game states. TODO: make this process more readable / easier to remember
+		StatePlaying *playing = new StatePlaying();
 		playing->registerAssetManager(&m_assetManager);
-		m_stateManager.addState("PLAYING", playing);
-		playing->load(); //TODO this is a clumsy way to setup the states, figure out something better
+		playing->loadSpace(space);
+		m_stateManager.addState("PLAYING", playing); 
 		
-		StatePaused* paused = new StatePaused();
+		StatePaused *paused = new StatePaused();
 		paused->registerAssetManager(&m_assetManager);
+		paused->loadSpace(space);
 		m_stateManager.addState("PAUSED", paused);
-		paused->load();
-		
+
 		Game::begin();
 	}
 

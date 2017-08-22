@@ -2,17 +2,18 @@
 #define STATE_PAUSED_HPP
 
 #include <ME/GameStateManager.hpp>
-#include <ME/GameObject.hpp>
+#include <ME/Space.hpp>
 
 namespace tg
 {
 	class StatePaused : public me::GameState
 	{
 	private:
-		me::GameObject m_obj;
+		std::shared_ptr<me::Space> m_space;
 
 	public:
-		void load();
+		void loadSpace(std::shared_ptr<me::Space> space);
+		
 
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
 		virtual void fixedUpdate();
