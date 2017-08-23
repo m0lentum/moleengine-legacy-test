@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
+#include "StatePaused.hpp"
 
 namespace tg
 {
@@ -28,7 +29,8 @@ namespace tg
 
 	void StatePlaying::fixedUpdate()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) m_stateManager->transitionTo("PAUSED");
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			m_stateManager->transitionTo(m_statePaused);
 		m_space->fixedUpdate();
 	}
 

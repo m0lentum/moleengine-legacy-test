@@ -18,16 +18,18 @@ namespace tg
 		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
 		space->addObject(new ObjTest(&m_assetManager));
 
-		//Setup the game states. TODO: make this process more readable / easier to remember
-		StatePlaying *playing = new StatePlaying();
-		playing->registerAssetManager(&m_assetManager);
-		playing->loadSpace(space);
-		m_stateManager.addState("PLAYING", playing); 
-		
-		StatePaused *paused = new StatePaused();
-		paused->registerAssetManager(&m_assetManager);
-		paused->loadSpace(space);
-		m_stateManager.addState("PAUSED", paused);
+		//Setup the game states.
+		m_statePlaying.registerAssetManager(&m_assetManager);
+		m_statePlaying.registerStateManager(&m_stateManager);
+		m_statePlaying.loadSpace(space);
+		m_statePlaying.registerStatePaused(&m_statePaused);
+
+		m_statePaused.registerAssetManager(&m_assetManager);
+		m_statePaused.registerStateManager(&m_stateManager);
+		m_statePaused.loadSpace(space);
+		m_statePaused.registerStatePlaying(&m_statePlaying);
+
+		m_stateManager.transitionTo(&m_statePlaying);
 
 		Game::begin();
 	}

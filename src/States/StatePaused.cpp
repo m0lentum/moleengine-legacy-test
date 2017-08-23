@@ -15,7 +15,7 @@ namespace tg
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
-			m_stateManager->transitionTo("PLAYING");
+			m_stateManager->transitionTo(m_statePlaying);
 		}
 	}
 

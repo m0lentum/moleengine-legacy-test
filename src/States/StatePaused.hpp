@@ -6,13 +6,17 @@
 
 namespace tg
 {
+	class StatePlaying;
+
 	class StatePaused : public me::IGameState
 	{
 	private:
 		std::shared_ptr<me::Space> m_space;
+		StatePlaying *m_statePlaying;
 
 	public:
 		void loadSpace(std::shared_ptr<me::Space> space);
+		inline void registerStatePlaying(StatePlaying *state) { m_statePlaying = state; }
 		
 		// IComponent update loops
 		virtual void continuousUpdate(const sf::Time &timeElapsed);

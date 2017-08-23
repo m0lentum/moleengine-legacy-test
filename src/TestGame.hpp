@@ -4,11 +4,16 @@
 #include <ME/Game.hpp>
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/AnimatedSprite.hpp>
+#include "States\AllStates.hpp"
 
 namespace tg
 {
 	class TestGame : public me::Game
 	{
+	private:
+		StatePaused m_statePaused;
+		StatePlaying m_statePlaying;
+
 	public:
 		virtual void begin();
 
