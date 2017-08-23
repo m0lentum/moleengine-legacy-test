@@ -6,7 +6,7 @@
 
 namespace tg
 {
-	class StatePlaying : public me::GameState
+	class StatePlaying : public me::IGameState
 	{
 	private:
 		std::shared_ptr<me::Space> m_space;
@@ -18,6 +18,7 @@ namespace tg
 		virtual void onTransitionIn();
 		virtual void onTransitionOut();
 
+		// IComponent update loops
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
 		virtual void fixedUpdate();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

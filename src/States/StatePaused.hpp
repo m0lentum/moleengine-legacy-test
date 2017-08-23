@@ -6,7 +6,7 @@
 
 namespace tg
 {
-	class StatePaused : public me::GameState
+	class StatePaused : public me::IGameState
 	{
 	private:
 		std::shared_ptr<me::Space> m_space;
@@ -14,7 +14,7 @@ namespace tg
 	public:
 		void loadSpace(std::shared_ptr<me::Space> space);
 		
-
+		// IComponent update loops
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
 		virtual void fixedUpdate();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
