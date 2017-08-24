@@ -1,9 +1,10 @@
 #include "TestGame.hpp"
-#include <iostream>
 #include "States/StatePlaying.hpp"
 #include "States/StatePaused.hpp"
 #include <ME/Space.hpp>
 #include "Objects/ObjTest.hpp"
+#include <ME/Input/Keyboard.hpp>
+//#include <iostream>
 
 namespace tg
 {
@@ -30,6 +31,9 @@ namespace tg
 		m_statePaused.registerStatePlaying(&m_statePlaying);
 
 		m_stateManager.transitionTo(&m_statePlaying);
+
+		me::Keyboard::trackKey(me::Keyboard::Space);
+		me::Keyboard::trackKey(me::Keyboard::Return);
 
 		Game::begin();
 	}

@@ -1,7 +1,7 @@
 #include "StatePlaying.hpp"
 #include <ME/Graphics/AnimatedSprite.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Keyboard.hpp>
+#include <ME/Input/Keyboard.hpp>
 #include <iostream>
 #include "StatePaused.hpp"
 
@@ -29,7 +29,7 @@ namespace tg
 
 	void StatePlaying::fixedUpdate()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (me::Keyboard::isKeyJustPressed(me::Keyboard::Space))
 			m_stateManager->transitionTo(m_statePaused);
 		m_space->fixedUpdate();
 	}
