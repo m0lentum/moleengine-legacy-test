@@ -4,7 +4,12 @@
 #include <ME/Space.hpp>
 #include "Objects/ObjTest.hpp"
 #include <ME/Input/Keyboard.hpp>
-//#include <iostream>
+#include <iostream>
+
+void printVector(const sf::Vector2f &vec)
+{
+	std::cout << "(" << vec.x << ", " << vec.y << ")" << std::endl;
+}
 
 namespace tg
 {
@@ -17,7 +22,7 @@ namespace tg
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
 		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
-		space->addObject(new ObjTest(&m_assetManager));
+		space->addObject(std::make_shared<ObjTest>(&m_assetManager));
 
 		//Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
@@ -34,6 +39,21 @@ namespace tg
 
 		me::Keyboard::trackKey(me::Keyboard::Space);
 		me::Keyboard::trackKey(me::Keyboard::Return);
+
+		// print out some vector math for ghetto unit testing
+		sf::Vector2f vec(10, 0);
+		sf::Vector2f v2(-5, 10);
+		printVector(vec);
+		printVector(-vec);
+		std::cout << me::VectorMath::dot(vec, v2) << std::endl;
+		std::cout << me::VectorMath::getLength(v2) << std::endl;
+		printVector(me::VectorMath::normalize(v2));
+		printVector(me::VectorMath::projectToVector(vec, v2));
+		printVector(me::VectorMath::rotateRad(vec, 3.1415927f / 2));
+		printVector(me::VectorMath::rotateDeg(vec, 90));
+		printVector(me::VectorMath::rotateDeg(vec, 45));
+		printVector(me::VectorMath::leftNormal(v2));
+		printVector(me::VectorMath::rightNormal(v2));
 
 		Game::begin();
 	}

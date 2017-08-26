@@ -5,6 +5,8 @@
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/AnimatedSprite.hpp>
 #include "States\AllStates.hpp"
+#include <ME/Physics/ICollider.hpp>
+#include <ME/Physics/VectorMath.hpp>
 
 namespace tg
 {

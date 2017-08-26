@@ -11,6 +11,8 @@ namespace tg
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(-2.0f, 0.0f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(0.0f, -2.0f);
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(0.0f, 2.0f);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) destroy();
 	}
 
 
