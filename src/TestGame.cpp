@@ -3,6 +3,7 @@
 #include "States/StatePaused.hpp"
 #include <ME/Space.hpp>
 #include "Objects/ObjTest.hpp"
+#include "Objects/PhysObjTest.hpp"
 #include <ME/Input/Keyboard.hpp>
 #include <iostream>
 
@@ -23,6 +24,7 @@ namespace tg
 
 		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
 		space->addObject(std::make_shared<ObjTest>(&m_assetManager));
+		space->addObject(std::make_shared<PhysObjTest>(&m_assetManager));
 
 		//Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
