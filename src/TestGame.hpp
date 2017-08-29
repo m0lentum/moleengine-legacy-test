@@ -6,6 +6,9 @@
 #include <ME/Graphics/AnimatedSprite.hpp>
 #include "States\AllStates.hpp"
 #include <ME/Physics/VectorMath.hpp>
+#include <ME/Physics/ColliderCircle.hpp>
+#include <ME/Physics/CollisionChecker.hpp>
+#include <ME/Physics/CollisionInfo.hpp>
 
 namespace tg
 {

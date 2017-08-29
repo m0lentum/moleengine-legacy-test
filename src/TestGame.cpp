@@ -24,9 +24,19 @@ namespace tg
 
 		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
 		space->addObject(std::make_shared<ObjTest>(&m_assetManager));
-		space->addObject(std::make_shared<PhysObjTest>(&m_assetManager));
+		std::shared_ptr<PhysObjTest> po1 = std::make_shared<PhysObjTest>(&m_assetManager);
+		space->addObject(po1);
+		std::shared_ptr<PhysObjTest> po2 = std::make_shared<PhysObjTest>(&m_assetManager);
+		space->addObject(po2);
 
-		//Setup the game states.
+		// Test collisions
+		const me::ICollider &c1 = po1->getCollider();
+		const me::ICollider &c2 = po2->getCollider();
+		me::CollisionInfo info;
+		me::CollisionChecker::checkCollision(c1, c2, info);
+		printVector(info.point);
+
+		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
 		m_statePlaying.registerStateManager(&m_stateManager);
 		m_statePlaying.loadSpace(space);
