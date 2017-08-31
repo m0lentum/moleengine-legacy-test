@@ -2,8 +2,8 @@
 #include "States/StatePlaying.hpp"
 #include "States/StatePaused.hpp"
 #include <ME/Space.hpp>
-#include "Objects/ObjTest.hpp"
-#include "Objects/PhysObjTest.hpp"
+#include "Objects/AllObjects.hpp"
+#include <ME/Physics/VectorMath.hpp>
 #include <ME/Input/Keyboard.hpp>
 #include <iostream>
 
@@ -24,17 +24,13 @@ namespace tg
 
 		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
 		space->addObject(std::make_shared<ObjTest>(&m_assetManager));
-		std::shared_ptr<PhysObjTest> po1 = std::make_shared<PhysObjTest>(&m_assetManager);
+		std::shared_ptr<PhysObjTest> po1 = std::make_shared<PhysObjTest>(80);
+		po1->setPosition(300, 300);
 		space->addObject(po1);
-		std::shared_ptr<PhysObjTest> po2 = std::make_shared<PhysObjTest>(&m_assetManager);
+		std::shared_ptr<PhysObjMoving> po2 = std::make_shared<PhysObjMoving>(100);
+		po2->setPosition(500, 200);
 		space->addObject(po2);
 
-		// Test collisions
-		const me::ICollider &c1 = po1->getCollider();
-		const me::ICollider &c2 = po2->getCollider();
-		me::CollisionInfo info;
-		me::CollisionChecker::checkCollision(c1, c2, info);
-		printVector(info.point);
 
 		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);

@@ -11,7 +11,7 @@ namespace tg
 	public:
 		virtual void fixedUpdate();
 
-		PhysObjTest(me::AssetManager *assetManager);
+		PhysObjTest(float radius);
 		virtual ~PhysObjTest();
 	};
 }

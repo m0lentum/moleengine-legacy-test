@@ -43,6 +43,7 @@ namespace tg
 
 	StatePlaying::StatePlaying()
 	{
+		m_view.reset(sf::FloatRect(0, 0, 800, 600));
 	}
 
 	StatePlaying::~StatePlaying()

@@ -2,13 +2,8 @@
 #define TEST_GAME_HPP
 
 #include <ME/Game.hpp>
-#include <ME/GameObject.hpp>
-#include <ME/Graphics/AnimatedSprite.hpp>
 #include "States\AllStates.hpp"
-#include <ME/Physics/VectorMath.hpp>
-#include <ME/Physics/ColliderCircle.hpp>
-#include <ME/Physics/CollisionChecker.hpp>
-#include <ME/Physics/CollisionInfo.hpp>
+#include <ME/Physics/PhysicsObject.hpp>
 
 namespace tg
 {
