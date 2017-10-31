@@ -1,6 +1,6 @@
 #include "PhysObjMoving.hpp"
 #include <ME/Graphics/Graphic.hpp>
-#include <ME/Physics/ColliderCircle.hpp>
+#include <ME/Physics/ColliderRect.hpp>
 
 namespace tg
 {
@@ -11,13 +11,14 @@ namespace tg
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(0.0f, -2.0f);
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(0.0f, 2.0f);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) destroy();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) rotate(1);
 	}
 
 
 	PhysObjMoving::PhysObjMoving(float radius) :
-		me::PhysicsObject(new me::ColliderCircle(radius))
+		me::PhysicsObject(new me::ColliderRect(80, 60))
 	{
+		//rotate(60);
 		setGraphicFromCollider(sf::Color::Black);
 	}
 

@@ -47,7 +47,7 @@ namespace tg
 
 		me::Keyboard::trackKey(me::Keyboard::Space);
 		me::Keyboard::trackKey(me::Keyboard::Return);
-
+		me::Keyboard::trackKey(me::Keyboard::M);
 
 		Game::begin();
 	}
