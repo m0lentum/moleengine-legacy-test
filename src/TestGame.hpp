@@ -2,7 +2,7 @@
 #define TEST_GAME_HPP
 
 #include <ME/Game.hpp>
-#include "States\AllStates.hpp"
+#include "States/AllStates.hpp"
 #include <ME/Physics/PhysicsObject.hpp>
 
 namespace tg
