@@ -13,7 +13,7 @@ namespace tg
 
 	ObjTest::ObjTest(me::AssetManager *assetManager)
 	{
-		setGraphic(std::make_shared<me::AnimatedSprite>(assetManager->getTexture("Sprite0001"), sf::Vector2i(0, 0),
+		setGraphic(new me::AnimatedSprite(assetManager->getTexture("Sprite0001"), sf::Vector2i(0, 0),
 			sf::Vector2i(100, 100), 5, sf::milliseconds(200)));
 		setOrigin(50, 50);
 		setPosition(100, 500);
