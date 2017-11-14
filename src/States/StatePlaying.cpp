@@ -7,7 +7,7 @@
 
 namespace tg
 {
-	void StatePlaying::loadSpace(std::shared_ptr<me::Space> space)
+	void StatePlaying::loadSpace(me::Space *space)
 	{
 		m_space = space;
 	}

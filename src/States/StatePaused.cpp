@@ -6,7 +6,7 @@
 
 namespace tg
 {
-	void StatePaused::loadSpace(std::shared_ptr<me::Space> space)
+	void StatePaused::loadSpace(me::Space *space)
 	{
 		m_space = space;
 	}

@@ -11,12 +11,12 @@ namespace tg
 	class StatePlaying : public me::IGameState
 	{
 	private:
-		std::shared_ptr<me::Space> m_space;
+		me::Space *m_space;
 		sf::View m_view;
 		StatePaused *m_statePaused;
 
 	public:
-		void loadSpace(std::shared_ptr<me::Space> space);
+		void loadSpace(me::Space *space);
 		inline void registerStatePaused(StatePaused *state) { m_statePaused = state; }
 
 		virtual void onTransitionIn();

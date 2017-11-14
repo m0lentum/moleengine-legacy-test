@@ -22,12 +22,12 @@ namespace tg
 
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
-		std::shared_ptr<me::Space> space = std::make_shared<me::Space>();
-		space->addObject(std::make_shared<ObjTest>(&m_assetManager));
-		std::shared_ptr<PhysObjTest> po1 = std::make_shared<PhysObjTest>(80);
+		me::Space *space = new me::Space();
+		space->addObject(new ObjTest(&m_assetManager));
+		PhysObjTest *po1 = new PhysObjTest(80);
 		po1->setPosition(300, 300);
 		space->addObject(po1);
-		std::shared_ptr<PhysObjMoving> po2 = std::make_shared<PhysObjMoving>(100);
+		PhysObjMoving *po2 = new PhysObjMoving(100);
 		po2->setPosition(500, 200);
 		space->addObject(po2);
 
