@@ -1,6 +1,6 @@
 #include "PhysObjMoving.hpp"
 #include <ME/Graphics/Graphic.hpp>
-#include <ME/Physics/ColliderPolygon.hpp>
+#include <ME/Physics/ColliderCircle.hpp>
 
 namespace tg
 {
@@ -16,7 +16,7 @@ namespace tg
 
 
 	PhysObjMoving::PhysObjMoving(float radius) :
-		me::PhysicsObject(new me::ColliderPolygon({ sf::Vector2f(60, 40), sf::Vector2f(30, 100), sf::Vector2f(-40, -20) }))
+		me::PhysicsObject(new me::ColliderCircle(50))
 	{
 		//rotate(60);
 		setGraphicFromCollider(sf::Color::Black);
