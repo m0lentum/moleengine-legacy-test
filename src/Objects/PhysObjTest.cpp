@@ -1,6 +1,6 @@
 #include "PhysObjTest.hpp"
 #include <ME/Graphics/AnimatedSprite.hpp>
-#include <ME/Physics/ColliderPolygon.hpp>
+#include <ME/Physics/ColliderRect.hpp>
 
 namespace tg
 {
@@ -11,7 +11,7 @@ namespace tg
 
 
 	PhysObjTest::PhysObjTest(float radius) :
-		me::PhysicsObject(new me::ColliderPolygon({ 10, -20, -20, 30, 70, 80, 100, 0 }))
+		me::PhysicsObject(new me::ColliderRect(70, 60))
 	{
 		setGraphicFromCollider();
 	}
