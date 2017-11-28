@@ -22,7 +22,7 @@ namespace tg
 		virtual void onTransitionIn();
 		virtual void onTransitionOut();
 
-		// IComponent update loops
+		// update loops
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
 		virtual void fixedUpdate();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

@@ -18,7 +18,7 @@ namespace tg
 		void loadSpace(me::Space *space);
 		inline void registerStatePlaying(StatePlaying *state) { m_statePlaying = state; }
 		
-		// IComponent update loops
+		// update loops
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
 		virtual void fixedUpdate();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
