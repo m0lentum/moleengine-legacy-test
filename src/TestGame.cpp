@@ -2,7 +2,6 @@
 #include "States/StatePlaying.hpp"
 #include "States/StatePaused.hpp"
 #include <ME/Space.hpp>
-#include "Objects/AllObjects.hpp"
 #include <ME/Physics/VectorMath.hpp>
 #include <ME/Input/Keyboard.hpp>
 #include <iostream>
@@ -23,13 +22,6 @@ namespace tg
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
 		me::Space *space = new me::Space();
-		space->addObject(new ObjTest(&m_assetManager));
-		PhysObjTest *po1 = new PhysObjTest(80);
-		po1->setPosition(300, 300);
-		space->addObject(po1);
-		PhysObjMoving *po2 = new PhysObjMoving(100);
-		po2->setPosition(500, 200);
-		space->addObject(po2);
 
 
 		// Setup the game states.
