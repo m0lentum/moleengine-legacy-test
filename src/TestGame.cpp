@@ -6,7 +6,6 @@
 #include <ME/Input/Keyboard.hpp>
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/Graphic.hpp>
-#include <ME/Graphics/GraphicController.hpp>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -25,21 +24,17 @@ namespace tg
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
 		me::Space *space = new me::Space();
-		space->addController(new me::GraphicController());
 
 		me::GameObject *obj = new me::GameObject();
-		obj->addComponent(me::Graphic::makeCircle(50, 30, sf::Color::Green));
+		obj->addBehavior(me::Graphic::makeCircle(50, 30, sf::Color::Green));
 		space->addObject(obj);
 
 		me::GameObject *obj2 = new me::GameObject();
-		obj2->addComponent(me::Graphic::makeCircle(100, 30, sf::Color::Blue));
+		obj2->addBehavior(me::Graphic::makeCircle(100, 30, sf::Color::Blue));
 		obj2->setPosition(300, 200);
 		obj2->setScale(2.0f, 1.5f);
 		space->addObject(obj2);
 
-		std::cout << obj->getID() << " " << obj2->getID() << std::endl;
-
-		space->removeObject(obj->getID());
 
 		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
