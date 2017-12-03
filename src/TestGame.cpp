@@ -4,6 +4,7 @@
 #include <ME/Input/Keyboard.hpp>
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/Graphic.hpp>
+#include <ME/Graphics/AnimatedSprite.hpp>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -28,8 +29,9 @@ namespace tg
 		m_obj->setPosition(200, 300);
 		m_obj->addComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
 		m_obj->removeComponent<me::Graphic>();
-		m_obj->addComponent<me::Graphic>(me::Graphic::makeRect(70, 120));
-		
+		m_obj->addComponent<me::AnimatedSprite>(new me::AnimatedSprite(m_assetManager.getTexture("Sprite0001"), 
+					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400)));
+
 
 
 		// Setup the game states.
@@ -55,6 +57,8 @@ namespace tg
 	void TestGame::continuousUpdate(sf::Time timeElapsed)
 	{
 		m_stateManager.continuousUpdate(timeElapsed);
+
+		m_obj->getComponent<me::AnimatedSprite>()->continuousUpdate(timeElapsed);
 	}
 
 	void TestGame::fixedUpdate()
@@ -68,7 +72,7 @@ namespace tg
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
 
-		m_obj->getComponent<me::Graphic>()->draw(m_mainWindow, sf::RenderStates(m_obj->getTransform()));
+		m_obj->getComponent<me::AnimatedSprite>()->draw(m_mainWindow, sf::RenderStates(m_obj->getTransform()));
 
 		m_mainWindow.display();
 	}
