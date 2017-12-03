@@ -3,7 +3,7 @@
 
 #include <ME/Game.hpp>
 #include "States/AllStates.hpp"
-#include <ME/Physics/PhysicsObject.hpp>
+#include <ME/GameObject.hpp>
 
 namespace tg
 {
@@ -12,6 +12,8 @@ namespace tg
 	private:
 		StatePaused m_statePaused;
 		StatePlaying m_statePlaying;
+
+		me::GameObject *m_obj;
 
 	public:
 		virtual void begin();

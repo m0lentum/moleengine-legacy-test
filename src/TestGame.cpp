@@ -1,6 +1,4 @@
 #include "TestGame.hpp"
-#include "States/StatePlaying.hpp"
-#include "States/StatePaused.hpp"
 #include <ME/Space.hpp>
 #include <ME/Physics/VectorMath.hpp>
 #include <ME/Input/Keyboard.hpp>
@@ -25,15 +23,13 @@ namespace tg
 
 		me::Space *space = new me::Space();
 
-		me::GameObject *obj = new me::GameObject();
-		obj->addBehavior(me::Graphic::makeCircle(50, 30, sf::Color::Green));
-		space->addObject(obj);
-
-		me::GameObject *obj2 = new me::GameObject();
-		obj2->addBehavior(me::Graphic::makeCircle(100, 30, sf::Color::Blue));
-		obj2->setPosition(300, 200);
-		obj2->setScale(2.0f, 1.5f);
-		space->addObject(obj2);
+		m_obj = new me::GameObject(space);
+		m_obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
+		m_obj->setPosition(200, 300);
+		m_obj->addComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
+		m_obj->removeComponent<me::Graphic>();
+		m_obj->addComponent<me::Graphic>(me::Graphic::makeRect(70, 120));
+		
 
 
 		// Setup the game states.
@@ -72,6 +68,8 @@ namespace tg
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
 
+		m_obj->getComponent<me::Graphic>()->draw(m_mainWindow, sf::RenderStates(m_obj->getTransform()));
+
 		m_mainWindow.display();
 	}
 
@@ -81,5 +79,6 @@ namespace tg
 
 	TestGame::~TestGame()
 	{
+		delete m_obj;
 	}
 }
