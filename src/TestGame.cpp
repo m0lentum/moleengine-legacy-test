@@ -5,6 +5,8 @@
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/Graphic.hpp>
 #include <ME/Graphics/AnimatedSprite.hpp>
+#include <ME/Graphics/GraphicController.hpp>
+#include <ME/ComponentContainer.hpp>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -24,15 +26,13 @@ namespace tg
 
 		me::Space *space = new me::Space();
 
-		m_obj = new me::GameObject(space);
-		m_obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
-		m_obj->setPosition(200, 300);
-		m_obj->addComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
-		m_obj->removeComponent<me::Graphic>();
-		m_obj->addComponent<me::AnimatedSprite>(new me::AnimatedSprite(m_assetManager.getTexture("Sprite0001"), 
-					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400)));
-
-
+		me::GameObject *obj = space->createObject();
+		/*obj->registerComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
+		obj->setPosition(200, 300);
+		obj->registerComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
+		obj->removeComponent<me::Graphic>();
+		obj->registerComponent<me::AnimatedSprite>(new me::AnimatedSprite(m_assetManager.getTexture("Sprite0001"), 
+					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400)));*/
 
 		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
@@ -57,8 +57,6 @@ namespace tg
 	void TestGame::continuousUpdate(sf::Time timeElapsed)
 	{
 		m_stateManager.continuousUpdate(timeElapsed);
-
-		m_obj->getComponent<me::AnimatedSprite>()->continuousUpdate(timeElapsed);
 	}
 
 	void TestGame::fixedUpdate()
@@ -72,8 +70,6 @@ namespace tg
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
 
-		m_obj->getComponent<me::AnimatedSprite>()->draw(m_mainWindow, sf::RenderStates(m_obj->getTransform()));
-
 		m_mainWindow.display();
 	}
 
@@ -83,6 +79,5 @@ namespace tg
 
 	TestGame::~TestGame()
 	{
-		delete m_obj;
 	}
 }
