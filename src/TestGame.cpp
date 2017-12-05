@@ -26,13 +26,16 @@ namespace tg
 
 		me::Space *space = new me::Space();
 
-		me::GameObject *obj = space->createObject();
-		/*obj->registerComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
+		obj = space->createObject();
+		obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
 		obj->setPosition(200, 300);
-		obj->registerComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
-		obj->removeComponent<me::Graphic>();
-		obj->registerComponent<me::AnimatedSprite>(new me::AnimatedSprite(m_assetManager.getTexture("Sprite0001"), 
-					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400)));*/
+		obj->addComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
+		obj->addComponent<me::AnimatedSprite>(m_assetManager.getTexture("Sprite0001"), 
+					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400));
+
+		std::cout << space->getContainer<me::Graphic>()->getSize() << std::endl;
+		std::cout << space->getContainer<me::AnimatedSprite>()->getSize() << std::endl;
+		
 
 		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
@@ -69,6 +72,8 @@ namespace tg
 		m_mainWindow.clear(sf::Color::Cyan);
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
+		obj->getComponent<me::AnimatedSprite>()->draw(m_mainWindow, sf::RenderStates());
+		obj->getComponent<me::Graphic>()->draw(m_mainWindow, sf::RenderStates());
 
 		m_mainWindow.display();
 	}
