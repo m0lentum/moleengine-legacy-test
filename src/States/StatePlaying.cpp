@@ -34,6 +34,11 @@ namespace tg
 		m_space->fixedUpdate();
 
 		frame++;
+		if (frame == 500)
+		{
+			m_space->getContainer<me::Graphic>()->cleanup();
+			std::cout << "Cleaning up" << std::endl;
+		}
 	}
 
 	void StatePlaying::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -46,12 +51,11 @@ namespace tg
 				unit.getComponent()->draw(target, states);
 			}
 		);
-
-		if (frame == 500) m_space->getContainer<me::Graphic>()->cleanup();
 	}
 
 
-	StatePlaying::StatePlaying()
+	StatePlaying::StatePlaying() :
+		frame(0)
 	{
 		m_view.reset(sf::FloatRect(0, 0, 800, 600));
 	}
