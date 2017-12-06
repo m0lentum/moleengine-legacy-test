@@ -15,6 +15,8 @@ namespace tg
 		sf::View m_view;
 		StatePaused *m_statePaused;
 
+		int frame;
+
 	public:
 		void loadSpace(me::Space *space);
 		inline void registerStatePaused(StatePaused *state) { m_statePaused = state; }

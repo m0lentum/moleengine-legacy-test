@@ -33,6 +33,15 @@ namespace tg
 		obj->addComponent<me::AnimatedSprite>(m_assetManager.getTexture("Sprite0001"), 
 					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400));
 
+		for (int i = 0; i < 100; i++)
+		{
+			me::GameObject *o = space->createObject();
+			o->addComponent<me::Graphic>(me::Graphic::makeRect(500, 20, sf::Color::Green));
+			o->removeComponent<me::Graphic>();
+		}
+
+		obj->removeComponent<me::Graphic>();
+
 		std::cout << space->getContainer<me::Graphic>()->getSize() << std::endl;
 		std::cout << space->getContainer<me::AnimatedSprite>()->getSize() << std::endl;
 		
@@ -72,9 +81,7 @@ namespace tg
 		m_mainWindow.clear(sf::Color::Cyan);
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
-		obj->getComponent<me::AnimatedSprite>()->draw(m_mainWindow, sf::RenderStates());
-		obj->getComponent<me::Graphic>()->draw(m_mainWindow, sf::RenderStates());
-
+		
 		m_mainWindow.display();
 	}
 
