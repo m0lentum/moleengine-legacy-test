@@ -24,7 +24,7 @@ namespace tg
 
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
-		me::Space *space = new me::Space();
+		me::Space *space = new me::Space(200);
 
 		obj = space->createObject();
 		obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
@@ -33,17 +33,10 @@ namespace tg
 		obj->addComponent<me::AnimatedSprite>(m_assetManager.getTexture("Sprite0001"), 
 					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400));
 
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
-			me::GameObject *o = space->createObject();
-			o->addComponent<me::Graphic>(me::Graphic::makeRect(500, 20, sf::Color::Green));
-			o->removeComponent<me::Graphic>();
+			obj->addComponent<me::Graphic>(me::Graphic::makeRect(500, 20, sf::Color::Green));
 		}
-
-		obj->removeComponent<me::Graphic>();
-
-		std::cout << space->getContainer<me::Graphic>()->getSize() << std::endl;
-		std::cout << space->getContainer<me::AnimatedSprite>()->getSize() << std::endl;
 		
 
 		// Setup the game states.

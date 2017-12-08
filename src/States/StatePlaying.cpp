@@ -4,6 +4,7 @@
 #include <ME/Input/Keyboard.hpp>
 #include <iostream>
 #include "StatePaused.hpp"
+#include <ME/GameObject.hpp>
 
 namespace tg
 {
@@ -32,13 +33,6 @@ namespace tg
 		if (me::Keyboard::isKeyJustPressed(me::Keyboard::Space))
 			m_stateManager->transitionTo(m_statePaused);
 		m_space->fixedUpdate();
-
-		frame++;
-		if (frame == 500)
-		{
-			m_space->getContainer<me::Graphic>()->cleanup();
-			std::cout << "Cleaning up" << std::endl;
-		}
 	}
 
 	void StatePlaying::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -49,6 +43,8 @@ namespace tg
 			[&](me::ComponentStorageUnit<me::Graphic> &unit)
 			{
 				unit.getComponent()->draw(target, states);
+				me::AnimatedSprite* anim = unit.getParent()->getComponent<me::AnimatedSprite>();
+				if (anim) anim->draw(target, states);
 			}
 		);
 	}
