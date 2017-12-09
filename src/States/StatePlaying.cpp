@@ -38,17 +38,8 @@ namespace tg
 
 	void StatePlaying::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		sf::Clock clock;
 		target.setView(m_view);
 		m_space->draw(target, states);
-		m_space->each<me::Graphic>(
-			[&](me::ComponentStorageUnit<me::Graphic> &unit)
-			{
-				unit.getComponent()->draw(target, sf::RenderStates(states.transform * unit.getParent()->getTransform()));
-				unit.getParent()->move(unit.getParent()->getPosition().y < 500 ? sf::Vector2f(0, 2) : sf::Vector2f(0, -100));
-			}
-		);
-		std::cout << "Time taken to draw: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;
 	}
 
 

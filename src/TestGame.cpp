@@ -5,7 +5,7 @@
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/Graphic.hpp>
 #include <ME/Graphics/AnimatedSprite.hpp>
-#include <ME/Graphics/GraphicController.hpp>
+#include <ME/Graphics/Renderer.hpp>
 #include <ME/ComponentContainer.hpp>
 #include <iostream>
 
@@ -45,6 +45,9 @@ namespace tg
 		std::cout << "Time to make objects: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;
 
 		space->createObject();
+
+		space->createSystem<me::Renderer>();
+		
 
 		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
