@@ -41,7 +41,7 @@ namespace tg
 		sf::Clock clock;
 		target.setView(m_view);
 		m_space->draw(target, states);
-		m_space->getContainer<me::Graphic>()->each(
+		m_space->each<me::Graphic>(
 			[&](me::ComponentStorageUnit<me::Graphic> &unit)
 			{
 				unit.getComponent()->draw(target, sf::RenderStates(states.transform * unit.getParent()->getTransform()));

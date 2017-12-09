@@ -24,7 +24,7 @@ namespace tg
 
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
-		me::Space *space = new me::Space(11000);
+		me::Space *space = new me::Space(9901);
 
 		obj = space->createObject();
 		obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
@@ -40,8 +40,11 @@ namespace tg
 			me::GameObject *obj = space->createObject();
 			obj->addComponent<me::Graphic>(me::Graphic::makeCircle(2, 20, sf::Color::Black));
 			obj->move(sf::Vector2f((i % 300) * 4, (i / 300) * 4));
+			if (i % 100 == 0) obj->destroy();
 		}
 		std::cout << "Time to make objects: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;
+
+		space->createObject();
 
 		// Setup the game states.
 		m_statePlaying.registerAssetManager(&m_assetManager);
