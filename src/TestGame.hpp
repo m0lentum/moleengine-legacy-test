@@ -10,10 +10,8 @@ namespace tg
 	class TestGame : public me::Game
 	{
 	private:
-		StatePaused m_statePaused;
-		StatePlaying m_statePlaying;
 
-		me::GameObject *obj;
+		me::Space m_mainSpace;
 
 	public:
 		virtual void begin();

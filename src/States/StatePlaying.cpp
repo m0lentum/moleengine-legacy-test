@@ -32,7 +32,7 @@ namespace tg
 	void StatePlaying::fixedUpdate()
 	{
 		if (me::Keyboard::isKeyJustPressed(me::Keyboard::Space))
-			m_stateManager->transitionTo(m_statePaused);
+			m_stateManager->transitionTo<StatePaused>();
 		m_space->fixedUpdate();
 	}
 
@@ -43,8 +43,7 @@ namespace tg
 	}
 
 
-	StatePlaying::StatePlaying() :
-		frame(0)
+	StatePlaying::StatePlaying()
 	{
 		m_view.reset(sf::FloatRect(0, 0, 800, 600));
 	}

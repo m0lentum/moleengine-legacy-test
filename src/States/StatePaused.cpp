@@ -19,14 +19,14 @@ namespace tg
 	void StatePaused::fixedUpdate()
 	{
 		if (me::Keyboard::isKeyJustPressed(me::Keyboard::Space))
-			m_stateManager->transitionTo(m_statePlaying);
-		//if (me::Keyboard::wasKeyPressed(me::Keyboard::Return))
-		//	m_space->fixedUpdate();
+			m_stateManager->transitionTo<StatePlaying>();
+		if (me::Keyboard::wasKeyPressed(me::Keyboard::Return))
+			m_space->fixedUpdate();
 	}
 
 	void StatePaused::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		//m_space->draw(target, states);
+		m_space->draw(target, states);
 	}
 
 	StatePaused::StatePaused()

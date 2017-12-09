@@ -24,9 +24,7 @@ namespace tg
 
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
-		me::Space *space = new me::Space(9901);
-
-		obj = space->createObject();
+		me::GameObject *obj = m_mainSpace.createObject();
 		obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
 		obj->setPosition(200, 300);
 		obj->addComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
@@ -37,30 +35,23 @@ namespace tg
 		sf::Clock clock;
 		for (int i = 0; i < 10000; i++)
 		{
-			me::GameObject *obj = space->createObject();
+			me::GameObject *obj = m_mainSpace.createObject();
 			obj->addComponent<me::Graphic>(me::Graphic::makeCircle(2, 20, sf::Color::Black));
 			obj->move(sf::Vector2f((i % 300) * 4, (i / 300) * 4));
 			if (i % 100 == 0) obj->destroy();
 		}
 		std::cout << "Time to make objects: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;
 
-		space->createObject();
+		m_mainSpace.createObject();
 
-		space->createSystem<me::Renderer>();
+		m_mainSpace.createSystem<me::Renderer>();
 		
 
 		// Setup the game states.
-		m_statePlaying.registerAssetManager(&m_assetManager);
-		m_statePlaying.registerStateManager(&m_stateManager);
-		m_statePlaying.loadSpace(space);
-		m_statePlaying.registerStatePaused(&m_statePaused);
-
-		m_statePaused.registerAssetManager(&m_assetManager);
-		m_statePaused.registerStateManager(&m_stateManager);
-		m_statePaused.loadSpace(space);
-		m_statePaused.registerStatePlaying(&m_statePlaying);
-
-		m_stateManager.transitionTo(&m_statePlaying);
+		StatePlaying *playing = m_stateManager.createState<StatePlaying>();
+		playing->loadSpace(&m_mainSpace);
+		StatePaused *paused = m_stateManager.createState<StatePaused>();
+		paused->loadSpace(&m_mainSpace);
 
 		me::Keyboard::trackKey(me::Keyboard::Space);
 		me::Keyboard::trackKey(me::Keyboard::Return);
@@ -88,7 +79,8 @@ namespace tg
 		m_mainWindow.display();
 	}
 
-	TestGame::TestGame()
+	TestGame::TestGame() :
+		m_mainSpace(9901)
 	{
 	}
 

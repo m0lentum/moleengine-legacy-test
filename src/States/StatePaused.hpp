@@ -12,11 +12,9 @@ namespace tg
 	{
 	private:
 		me::Space *m_space;
-		StatePlaying *m_statePlaying;
 
 	public:
 		void loadSpace(me::Space *space);
-		inline void registerStatePlaying(StatePlaying *state) { m_statePlaying = state; }
 		
 		// update loops
 		virtual void continuousUpdate(const sf::Time &timeElapsed);
