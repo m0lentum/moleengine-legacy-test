@@ -1,12 +1,15 @@
 #include "TestGame.hpp"
 #include <ME/Space.hpp>
 #include <ME/Physics/VectorMath.hpp>
+#include <ME/Physics/Physics.hpp>
 #include <ME/Input/Keyboard.hpp>
 #include <ME/GameObject.hpp>
 #include <ME/Graphics/Graphic.hpp>
 #include <ME/Graphics/AnimatedSprite.hpp>
 #include <ME/Graphics/Renderer.hpp>
 #include <ME/ComponentContainer.hpp>
+#include <ME/Physics/RigidBody.hpp>
+#include <ME/Physics/ColliderCircle.hpp>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -31,8 +34,16 @@ namespace tg
 		obj->addComponent<me::AnimatedSprite>(m_assetManager.getTexture("Sprite0001"), 
 					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400));
 		obj->removeComponent<me::Graphic>();
+		obj->addComponent<me::RigidBody>();
+		me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(50);
+		obj->addComponent<me::Graphic>(coll->toVertexArray());
 
-		sf::Clock clock;
+		me::RigidBody *rb = obj->getComponent<me::RigidBody>();
+		rb->accelerate(sf::Vector2f(2.0f, 1.0f));
+		rb->angularVelocity = 5.0f;
+		rb->setGravityOverride(sf::Vector2f(0.005f, 0));
+
+		/*sf::Clock clock;
 		for (int i = 0; i < 10000; i++)
 		{
 			me::GameObject *obj = m_mainSpace.createObject();
@@ -40,11 +51,11 @@ namespace tg
 			obj->move(sf::Vector2f((i % 300) * 4, (i / 300) * 4));
 			if (i % 100 == 0) obj->destroy();
 		}
-		std::cout << "Time to make objects: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;
+		std::cout << "Time to make objects: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;*/
 
-		m_mainSpace.createObject();
 
 		m_mainSpace.createSystem<me::Renderer>();
+		m_mainSpace.createSystem<me::Physics>();
 		
 
 		// Setup the game states.
@@ -80,7 +91,7 @@ namespace tg
 	}
 
 	TestGame::TestGame() :
-		m_mainSpace(9901)
+		m_mainSpace(100)
 	{
 	}
 
