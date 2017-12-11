@@ -10,6 +10,9 @@
 #include <ME/ComponentContainer.hpp>
 #include <ME/Physics/RigidBody.hpp>
 #include <ME/Physics/ColliderCircle.hpp>
+#include <ME/Physics/ColliderRect.hpp>
+#include <ME/Physics/ColliderPolygon.hpp>
+#include <initializer_list>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -28,30 +31,21 @@ namespace tg
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
 		me::GameObject *obj = m_mainSpace.createObject();
-		obj->addComponent<me::Graphic>(me::Graphic::makeCircle(70, 20, sf::Color::Black));
-		obj->setPosition(200, 300);
-		obj->addComponent<me::Graphic>(me::Graphic::makeRect(100, 70));
-		obj->addComponent<me::AnimatedSprite>(m_assetManager.getTexture("Sprite0001"), 
-					sf::Vector2i(), sf::Vector2i(100, 100), 5, sf::milliseconds(400));
-		obj->removeComponent<me::Graphic>();
 		obj->addComponent<me::RigidBody>();
-		me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(50);
+		me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(60, 80);
 		obj->addComponent<me::Graphic>(coll->toVertexArray());
 
 		me::RigidBody *rb = obj->getComponent<me::RigidBody>();
-		rb->accelerate(sf::Vector2f(2.0f, 1.0f));
+		rb->accelerate(sf::Vector2f(2.0f, 0));
 		rb->angularVelocity = 5.0f;
-		rb->setGravityOverride(sf::Vector2f(0.005f, 0));
+		rb->isKinematic = true;
+		obj->setPosition(10, 300);
 
-		/*sf::Clock clock;
-		for (int i = 0; i < 10000; i++)
-		{
-			me::GameObject *obj = m_mainSpace.createObject();
-			obj->addComponent<me::Graphic>(me::Graphic::makeCircle(2, 20, sf::Color::Black));
-			obj->move(sf::Vector2f((i % 300) * 4, (i / 300) * 4));
-			if (i % 100 == 0) obj->destroy();
-		}
-		std::cout << "Time to make objects: " << clock.getElapsedTime().asMilliseconds() << " ms" << std::endl;*/
+		me::GameObject *obj2 = m_mainSpace.createObject();
+		obj2->addComponent<me::RigidBody>()->angularVelocity = 3;
+		me::ColliderRect *coll2 = obj2->addComponent<me::ColliderRect>(50, 90);
+		obj2->addComponent<me::Graphic>(coll2->toVertexArray(sf::Color::Black));
+		obj2->setPosition(400, 310);
 
 
 		m_mainSpace.createSystem<me::Renderer>();
