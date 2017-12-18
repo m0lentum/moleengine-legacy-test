@@ -25,6 +25,8 @@ namespace tg
 		virtual void fixedUpdate();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+		virtual void handleWindowEvent(const sf::Event &evt);
+
 		StatePlaying();
 		~StatePlaying();
 	};

@@ -42,6 +42,11 @@ namespace tg
 		m_space->draw(target, states);
 	}
 
+	void StatePlaying::handleWindowEvent(const sf::Event &evt)
+	{
+		m_space->handleWindowEvent(evt);
+	}
+
 
 	StatePlaying::StatePlaying()
 	{
