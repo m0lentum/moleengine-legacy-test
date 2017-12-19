@@ -15,6 +15,7 @@
 #include <initializer_list>
 #include <ME/Input/KeyboardController.hpp>
 #include <ME/Input/MouseController.hpp>
+#include "ObjectFactory.hpp"
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -32,36 +33,22 @@ namespace tg
 
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
-		me::GameObject *obj = m_mainSpace.createObject();
-		obj->addComponent<me::RigidBody>();
-		me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(60, 80);
-		obj->addComponent<me::Graphic>(coll->toVertexArray());
+		ObjectFactory::makePlayer(&m_mainSpace);
 
-		me::RigidBody *rb = obj->getComponent<me::RigidBody>();
-		//rb->accelerate(sf::Vector2f(2.0f, 0));
-		rb->angularVelocity = 5.0f;
-		rb->isKinematic = true;
-		obj->setPosition(10, 300);
-		me::KeyboardController *cont = obj->addComponent<me::KeyboardController>();
-		cont->onKeyPressed = [obj](const sf::Event::KeyEvent &evt)
+		for (int i = 1; i < 10; i++)
 		{
-			if (evt.code == sf::Keyboard::Right) obj->getComponent<me::RigidBody>()->accelerate(sf::Vector2f(2.0f, 0));
-		};
-		me::MouseController *mcont = obj->addComponent<me::MouseController>();
-		mcont->onMouseButtonPressed = [obj](const sf::Event::MouseButtonEvent &evt)
-		{
-			obj->getComponent<me::RigidBody>()->accelerate(sf::Vector2f(-1.0f, 0));
-		};
+			me::GameObject *obj = ObjectFactory::makeBox(&m_mainSpace, 30 + 5 * i, 80 - 5 * i);
+			obj->setPosition(600 - i * 50, i * 50);
+			obj->getComponent<me::RigidBody>()->angularVelocity = i % 2 == 0 ? 2 : -2;
+		}
 
-		me::GameObject *obj2 = m_mainSpace.createObject();
-		obj2->addComponent<me::RigidBody>()->angularVelocity = 3;
-		me::ColliderRect *coll2 = obj2->addComponent<me::ColliderRect>(50, 90);
-		obj2->addComponent<me::Graphic>(coll2->toVertexArray(sf::Color::Black));
-		obj2->setPosition(400, 310);
+		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 1000, 50);
+		floor->setPosition(400.0f, 550.0f);
+		floor->getComponent<me::RigidBody>()->isStatic = true;
 
 
 		m_mainSpace.createSystem<me::Renderer>();
-		m_mainSpace.createSystem<me::Physics>();
+		m_mainSpace.createSystem<me::Physics>(sf::Vector2f(0, 0.005f));
 		
 
 		// Setup the game states.
