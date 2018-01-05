@@ -16,6 +16,7 @@
 #include <ME/Input/KeyboardController.hpp>
 #include <ME/Input/MouseController.hpp>
 #include "ObjectFactory.hpp"
+#include <ME/Utility/TimerSystem.hpp>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -29,7 +30,7 @@ namespace tg
 	{
 		m_title = "MoleEngine test game";
 		createWindow(800, 600);
-		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f); //120fps
+		m_fixedUpdateInterval = sf::seconds(1.0f / 120.0f);
 
 		m_assetManager.loadTexture("assets/Sprite-0001.png", "Sprite0001");
 
@@ -49,6 +50,7 @@ namespace tg
 
 		m_mainSpace.createSystem<me::Renderer>();
 		m_mainSpace.createSystem<me::Physics>(sf::Vector2f(0, 0.005f));
+		m_mainSpace.createSystem<me::TimerSystem>();
 		
 
 		// Setup the game states.
