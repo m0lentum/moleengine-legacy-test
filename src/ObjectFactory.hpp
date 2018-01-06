@@ -6,13 +6,11 @@
 
 namespace tg
 {
-    class ObjectFactory
+    namespace ObjectFactory
     {
-    public:
-
-        static me::GameObject* makePlayer(me::Space *space);
-
-        static me::GameObject* makeBox(me::Space *space, float width, float height);
+        me::GameObject* makePlayer(me::Space *space);
+        me::GameObject* makeBox(me::Space *space, float width, float height);
+		me::GameObject* makeBall(me::Space *space, float radius);
     };
 }
 

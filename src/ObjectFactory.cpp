@@ -16,7 +16,7 @@ namespace tg
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         rb->isKinematic = true;
         me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(50.0f);
-        obj->addComponent<me::Graphic>(coll->toVertexArray());
+        obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Green));
         me::MouseController *cont = obj->addComponent<me::MouseController>();
         cont->onMouseMoved = [obj](const sf::Event::MouseMoveEvent &evt)
         {
@@ -36,5 +36,13 @@ namespace tg
         return obj;
     }
 
-    
+	me::GameObject* ObjectFactory::makeBall(me::Space *space, float radius)
+	{
+		me::GameObject *obj = space->createObject();
+		me::RigidBody *rb = obj->addComponent<me::RigidBody>();
+		me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(radius);
+		obj->addComponent<me::Graphic>(coll->toVertexArray());
+
+		return obj;
+	}
 }

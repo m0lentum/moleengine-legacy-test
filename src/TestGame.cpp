@@ -36,11 +36,17 @@ namespace tg
 
 		ObjectFactory::makePlayer(&m_mainSpace);
 
-		for (int i = 1; i < 10; i++)
+		for (int i = 1; i < 5; i++)
 		{
-			me::GameObject *obj = ObjectFactory::makeBox(&m_mainSpace, 30 + 5 * i, 80 - 5 * i);
-			obj->setPosition(600 - i * 50, i * 50);
-			obj->getComponent<me::RigidBody>()->angularVelocity = i % 2 == 0 ? 2 : -2;
+			me::GameObject *obj = ObjectFactory::makeBall(&m_mainSpace, 30 + 3 * i);
+			obj->setPosition(500 - i * 100, i * 100);
+		}
+
+		for (int j = 1; j < 5; j++)
+		{
+			me::GameObject *obj = ObjectFactory::makeBox(&m_mainSpace, 80 + 15 * j, 100 - 15 * j);
+			obj->setPosition(750 - j * 100, j * 100);
+			obj->setRotation(30 * j);
 		}
 
 		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 1000, 50);
@@ -49,7 +55,7 @@ namespace tg
 
 
 		m_mainSpace.createSystem<me::Renderer>();
-		m_mainSpace.createSystem<me::Physics>(sf::Vector2f(0, 0.005f));
+		m_mainSpace.createSystem<me::Physics>();
 		m_mainSpace.createSystem<me::TimerSystem>();
 		
 
