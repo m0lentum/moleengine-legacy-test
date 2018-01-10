@@ -49,7 +49,7 @@ namespace tg
 			obj->setRotation(30 * j);
 		}
 
-		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 1000, 50);
+		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 700, 50);
 		floor->setPosition(400.0f, 550.0f);
 		floor->getComponent<me::RigidBody>()->isStatic = true;
 

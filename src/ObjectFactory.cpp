@@ -15,8 +15,9 @@ namespace tg
         me::GameObject *obj = space->createObject();
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         rb->isKinematic = true;
-        me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(50.0f);
-        obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Green));
+		//rb->angularVelocity = 0.5f;
+        me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(130.0f, 80.0f);
+        obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Black));
         me::MouseController *cont = obj->addComponent<me::MouseController>();
         cont->onMouseMoved = [obj](const sf::Event::MouseMoveEvent &evt)
         {
