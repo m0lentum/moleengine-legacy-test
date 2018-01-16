@@ -5,6 +5,7 @@
 #include <ME/Input/MouseController.hpp>
 #include <ME/Physics/ColliderCircle.hpp>
 #include <ME/Physics/ColliderRect.hpp>
+#include <ME/Physics/ColliderPolygon.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -46,4 +47,14 @@ namespace tg
 
 		return obj;
 	}
+
+    me::GameObject* ObjectFactory::makePolygon(me::Space *space, std::initializer_list<float> coords, sf::Color color)
+    {
+        me::GameObject *obj = space->createObject();
+        me::RigidBody *rb = obj->addComponent<me::RigidBody>();
+        me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(coords);
+        obj->addComponent<me::Graphic>(coll->toVertexArray(color));
+
+        return obj;
+    }
 }

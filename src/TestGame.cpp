@@ -39,15 +39,21 @@ namespace tg
 		for (int i = 1; i < 5; i++)
 		{
 			me::GameObject *obj = ObjectFactory::makeBall(&m_mainSpace, 30 + 3 * i);
-			obj->setPosition(500 - i * 100, i * 100);
+			obj->setPosition(400 - i * 100, i * 100);
 		}
 
 		for (int j = 1; j < 5; j++)
 		{
 			me::GameObject *obj = ObjectFactory::makeBox(&m_mainSpace, 80 + 15 * j, 100 - 15 * j);
-			obj->setPosition(750 - j * 100, j * 100);
+			obj->setPosition(600 - j * 100, j * 100);
 			obj->setRotation(30 * j);
 		}
+
+		me::GameObject *poly1 = ObjectFactory::makePolygon(&m_mainSpace, { 20, 50, 10, 80, 0, 90, -10, 70, -20, -10, 10, 30 }, sf::Color::Blue);
+		poly1->setPosition(600, 300);
+
+		me::GameObject *poly2 = ObjectFactory::makePolygon(&m_mainSpace, { 500, 600, 450, 650, 400, 600 }, sf::Color::Green);
+		poly2->setPosition(450, 400);
 
 		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 700, 50);
 		floor->setPosition(400.0f, 550.0f);

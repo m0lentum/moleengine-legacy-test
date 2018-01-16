@@ -3,6 +3,8 @@
 
 #include <ME/GameObject.hpp>
 #include <ME/Space.hpp>
+#include <initializer_list>
+#include <SFML/Graphics/Color.hpp>
 
 namespace tg
 {
@@ -11,6 +13,7 @@ namespace tg
         me::GameObject* makePlayer(me::Space *space);
         me::GameObject* makeBox(me::Space *space, float width, float height);
 		me::GameObject* makeBall(me::Space *space, float radius);
+        me::GameObject* makePolygon(me::Space *space, std::initializer_list<float> coords, sf::Color color);
     };
 }
 
