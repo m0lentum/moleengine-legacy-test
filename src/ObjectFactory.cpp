@@ -17,7 +17,7 @@ namespace tg
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         rb->isKinematic = true;
 		//rb->angularVelocity = 0.5f;
-        me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(130.0f, 80.0f);
+		me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(std::initializer_list<float>({ 130.0f, 80.0f, 0, 50.0f, -50.0f, 0 }));
         obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Black));
         me::MouseController *cont = obj->addComponent<me::MouseController>();
         cont->onMouseMoved = [obj](const sf::Event::MouseMoveEvent &evt)
