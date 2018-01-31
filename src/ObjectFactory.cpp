@@ -6,6 +6,7 @@
 #include <ME/Physics/ColliderCircle.hpp>
 #include <ME/Physics/ColliderRect.hpp>
 #include <ME/Physics/ColliderPolygon.hpp>
+#include <ME/Utility/UpdateLoopComponent.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -17,13 +18,23 @@ namespace tg
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         rb->isKinematic = true;
 		//rb->angularVelocity = 0.5f;
-		me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(std::initializer_list<float>({ 130.0f, 80.0f, 0, 50.0f, -50.0f, 0 }));
+		me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(std::initializer_list<float>({ 130.0f, 80.0f, -50.0f, 0, 0, 50.0f }));
         obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Black));
-        me::MouseController *cont = obj->addComponent<me::MouseController>();
-        cont->onMouseMoved = [obj](const sf::Event::MouseMoveEvent &evt)
-        {
-            obj->setPosition(evt.x, evt.y);
-        };
+
+		obj->addComponent<me::FixedUpdateLoop>([rb]()
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) rb->angularVelocity = -0.5f;
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) rb->angularVelocity = 0.5f;
+			else rb->angularVelocity = 0;
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) rb->velocity.x = 3.0f;
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) rb->velocity.x = -3.0f;
+			else rb->velocity.x = 0;
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) rb->velocity.y = -3.0f;
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) rb->velocity.y = 3.0f;
+			else rb->velocity.y = 0;
+		});
 
         return obj;
     }

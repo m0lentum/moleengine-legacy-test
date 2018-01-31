@@ -49,10 +49,10 @@ namespace tg
 			obj->setRotation(30 * j);
 		}
 
-		me::GameObject *poly1 = ObjectFactory::makePolygon(&m_mainSpace, { 20, 50, 10, 80, 0, 90, -10, 70, -20, -10, 10, 30 }, sf::Color::Blue);
+		me::GameObject *poly1 = ObjectFactory::makePolygon(&m_mainSpace, { 0, 10, 50, 20, 80, -10, 0, -20, -30, -10 }, sf::Color::Blue);
 		poly1->setPosition(600, 300);
 
-		me::GameObject *poly2 = ObjectFactory::makePolygon(&m_mainSpace, { 500, 600, 450, 650, 400, 600 }, sf::Color::Green);
+		me::GameObject *poly2 = ObjectFactory::makePolygon(&m_mainSpace, { 500, 600, 400, 600, 450, 650 }, sf::Color::Green);
 		poly2->setPosition(450, 400);
 
 		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 700, 50);
