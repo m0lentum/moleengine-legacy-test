@@ -18,7 +18,7 @@ file(GLOB_RECURSE SOURCES src/*.cpp)
 include_directories(${MoleEngine_INCLUDE_DIRS})
 add_executable(${EXEC_NAME} ${SOURCES})
 
-target_link_libraries(${EXEC_NAME} LibMoleEngine)
+target_link_libraries(${EXEC_NAME} MoleEngine)
 
 #automatically copy assets to the build folder
 add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
