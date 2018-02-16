@@ -17,6 +17,8 @@
 #include <ME/Input/MouseController.hpp>
 #include "ObjectFactory.hpp"
 #include <ME/Utility/TimerSystem.hpp>
+#include <imgui/imgui.h>
+#include <imgui/imgui-SFML.h>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -26,7 +28,7 @@ void printVector(const sf::Vector2f &vec)
 
 namespace tg
 {
-	void TestGame::begin()
+	void TestGame::init()
 	{
 		m_title = "MoleEngine test game";
 		createWindow(800, 600);
@@ -74,13 +76,22 @@ namespace tg
 		me::Keyboard::trackKey(me::Keyboard::Space);
 		me::Keyboard::trackKey(me::Keyboard::Return);
 		me::Keyboard::trackKey(me::Keyboard::M);
-
-		Game::begin();
 	}
 
 	void TestGame::continuousUpdate(sf::Time timeElapsed)
 	{
 		m_stateManager.continuousUpdate(timeElapsed);
+
+		ImGui::SFML::Update(m_mainWindow, timeElapsed);
+		ImGui::Begin("Test window");
+		ImGui::InputText("Test field", m_testTextBuffer, 255);
+		if (ImGui::Button("Poop"))
+		{
+			std::cout << "Poop" << std::endl;
+		}
+		ImGui::End();
+
+		ImGui::EndFrame();
 	}
 
 	void TestGame::fixedUpdate()
@@ -93,12 +104,14 @@ namespace tg
 		m_mainWindow.clear(sf::Color::Cyan);
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
+		ImGui::SFML::Render(m_mainWindow);
 		
 		m_mainWindow.display();
 	}
 
 	TestGame::TestGame() :
-		m_mainSpace(100)
+		m_mainSpace(100),
+		m_testTextBuffer("Testing this thing out")
 	{
 	}
 

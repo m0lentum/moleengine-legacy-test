@@ -12,9 +12,10 @@ namespace tg
 	private:
 
 		me::Space m_mainSpace;
+		char m_testTextBuffer[255];
 
 	public:
-		virtual void begin();
+		virtual void init();
 
 		TestGame();
 		~TestGame();
