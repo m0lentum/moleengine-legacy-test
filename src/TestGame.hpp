@@ -4,6 +4,7 @@
 #include <ME/Game.hpp>
 #include "States/AllStates.hpp"
 #include <ME/GameObject.hpp>
+#include <ME/Devtools/SpawnerWindow.hpp>
 
 namespace tg
 {
@@ -13,6 +14,8 @@ namespace tg
 
 		me::Space m_mainSpace;
 		char m_testTextBuffer[255];
+
+		me::SpawnerWindow m_spawner;
 
 	public:
 		virtual void init();

@@ -19,6 +19,7 @@
 #include <ME/Utility/TimerSystem.hpp>
 #include <imgui/imgui.h>
 #include <imgui/imgui-SFML.h>
+#include <ME/Devtools/SpawnerWindow.hpp>
 #include <iostream>
 
 void printVector(const sf::Vector2f &vec)
@@ -73,23 +74,18 @@ namespace tg
 		StatePaused *paused = m_stateManager.createState<StatePaused>();
 		paused->loadSpace(&m_mainSpace);
 
-		me::Keyboard::trackKey(me::Keyboard::Space);
-		me::Keyboard::trackKey(me::Keyboard::Return);
-		me::Keyboard::trackKey(me::Keyboard::M);
+
+		m_spawner.addObject("ball", [](me::Space *space) { return ObjectFactory::makeBall(space, 30); });
+		m_spawner.addObject("player", ObjectFactory::makePlayer);
 	}
 
 	void TestGame::continuousUpdate(sf::Time timeElapsed)
 	{
+		ImGui::SFML::Update(m_mainWindow, timeElapsed);
+		
 		m_stateManager.continuousUpdate(timeElapsed);
 
-		ImGui::SFML::Update(m_mainWindow, timeElapsed);
-		ImGui::Begin("Test window");
-		ImGui::InputText("Test field", m_testTextBuffer, 255);
-		if (ImGui::Button("Poop"))
-		{
-			std::cout << "Poop" << std::endl;
-		}
-		ImGui::End();
+		m_spawner.continuousUpdate(timeElapsed);
 
 		ImGui::EndFrame();
 	}
@@ -111,7 +107,8 @@ namespace tg
 
 	TestGame::TestGame() :
 		m_mainSpace(100),
-		m_testTextBuffer("Testing this thing out")
+		m_testTextBuffer("Testing this thing out"),
+		m_spawner(&m_mainSpace)
 	{
 	}
 

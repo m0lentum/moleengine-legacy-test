@@ -18,7 +18,7 @@ namespace tg
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         rb->isKinematic = true;
 		//rb->angularVelocity = 0.5f;
-		me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(std::initializer_list<float>({ 130.0f, 80.0f, -50.0f, 0, 0, 50.0f }));
+		me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(80.0f, 40.0f);
         obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Black));
 
 		obj->addComponent<me::FixedUpdateLoop>([rb]()
