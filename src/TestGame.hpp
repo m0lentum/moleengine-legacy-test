@@ -28,6 +28,7 @@ namespace tg
 		virtual void fixedUpdate();
 		virtual void draw();
 
+		virtual void handleWindowEvent(sf::Event &evt);
 	};
 }
 #endif //TEST_GAME_HPP

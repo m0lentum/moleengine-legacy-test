@@ -74,9 +74,19 @@ namespace tg
 		StatePaused *paused = m_stateManager.createState<StatePaused>();
 		paused->loadSpace(&m_mainSpace);
 
-
-		m_spawner.addObject("ball", [](me::Space *space) { return ObjectFactory::makeBall(space, 30); });
+		m_spawner.setDefaultGraphic(me::Graphic::makeCircle(5, 6, sf::Color(255, 255, 255, 180)));
+		m_spawner.addObject("ball", [](me::Space *space) { return ObjectFactory::makeBall(space, 30); }, me::Graphic::makeCircle(30, 8, sf::Color(255, 255, 255, 150)));
 		m_spawner.addObject("player", ObjectFactory::makePlayer);
+	}
+
+	void TestGame::handleWindowEvent(sf::Event &evt)
+	{
+		m_stateManager.handleWindowEvent(evt);
+
+		if (evt.type == sf::Event::MouseButtonPressed)
+		{
+			m_spawner.onMousePressed(evt.mouseButton);
+		}
 	}
 
 	void TestGame::continuousUpdate(sf::Time timeElapsed)
@@ -100,6 +110,7 @@ namespace tg
 		m_mainWindow.clear(sf::Color::Cyan);
 		
 		m_stateManager.draw(m_mainWindow, sf::RenderStates());
+		m_spawner.draw(m_mainWindow, sf::RenderStates());
 		ImGui::SFML::Render(m_mainWindow);
 		
 		m_mainWindow.display();
