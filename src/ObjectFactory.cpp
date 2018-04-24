@@ -16,9 +16,9 @@ namespace tg
     {
         me::GameObject *obj = space->createObject();
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
-        rb->isKinematic = true;
 		//rb->angularVelocity = 0.5f;
 		me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(80.0f, 40.0f);
+		coll->linkRigidBody(rb);
         obj->addComponent<me::Graphic>(coll->toVertexArray(sf::Color::Black));
 
 		obj->addComponent<me::FixedUpdateLoop>([rb]()
@@ -43,7 +43,9 @@ namespace tg
     {
         me::GameObject *obj = space->createObject();
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
+		rb->isStatic = true;
         me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(width, height);
+		coll->linkRigidBody(rb);
         obj->addComponent<me::Graphic>(coll->toVertexArray());
 
         return obj;
@@ -54,6 +56,7 @@ namespace tg
 		me::GameObject *obj = space->createObject();
 		me::RigidBody *rb = obj->addComponent<me::RigidBody>();
 		me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(radius);
+		coll->linkRigidBody(rb);
 		obj->addComponent<me::Graphic>(coll->toVertexArray());
 
 		return obj;
@@ -64,6 +67,7 @@ namespace tg
         me::GameObject *obj = space->createObject();
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(coords);
+		coll->linkRigidBody(rb);
         obj->addComponent<me::Graphic>(coll->toVertexArray(color));
 
         return obj;
