@@ -14,6 +14,7 @@ namespace tg
         me::GameObject* makeBox(me::Space *space, float width, float height);
 		me::GameObject* makeBall(me::Space *space, float radius);
         me::GameObject* makePolygon(me::Space *space, std::initializer_list<float> coords, sf::Color color);
+		void makeWalls(me::Space *space, float left, float top, float width, float height, float thickness);
     };
 }
 

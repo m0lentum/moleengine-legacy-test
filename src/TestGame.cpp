@@ -39,7 +39,7 @@ namespace tg
 
 		ObjectFactory::makePlayer(&m_mainSpace);
 
-		for (int i = 1; i < 5; i++)
+		for (int i = 1; i < 4; i++)
 		{
 			me::GameObject *obj = ObjectFactory::makeBall(&m_mainSpace, 30 + 3 * i);
 			obj->setPosition(400 - i * 100, i * 100);
@@ -58,13 +58,21 @@ namespace tg
 		me::GameObject *poly2 = ObjectFactory::makePolygon(&m_mainSpace, { 500, 600, 400, 600, 450, 650 }, sf::Color::White);
 		poly2->setPosition(450, 400);
 
-		me::GameObject *floor = ObjectFactory::makeBox(&m_mainSpace, 700, 50);
-		floor->setPosition(400.0f, 550.0f);
-		floor->getComponent<me::RigidBody>()->isStatic = true;
+		me::GameObject *floor1 = ObjectFactory::makeBox(&m_mainSpace, 800, 50);
+		floor1->setPosition(200.0f, 500.0f);
+		floor1->rotate(30.0f);
+		floor1->getComponent<me::RigidBody>()->isKinematic = true;
+
+		me::GameObject *floor2 = ObjectFactory::makeBox(&m_mainSpace, 800, 50);
+		floor2->setPosition(600.0f, 500.0f);
+		floor2->rotate(-30.0f);
+		floor2->getComponent<me::RigidBody>()->isKinematic = true;
+
+		ObjectFactory::makeWalls(&m_mainSpace, 10.0f, 10.0f, 780.0f, 580.0f, 5.0f);
 
 
 		m_mainSpace.createSystem<me::Renderer>();
-		m_mainSpace.createSystem<me::Physics>();
+		m_mainSpace.createSystem<me::Physics>(sf::Vector2f(0, 0.015f));
 		m_mainSpace.createSystem<me::TimerSystem>();
 		
 
