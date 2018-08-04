@@ -82,6 +82,9 @@ namespace tg
 		StatePaused *paused = m_stateManager.createState<StatePaused>();
 		paused->loadSpace(&m_mainSpace);
 
+		me::Keyboard::trackKey(me::Keyboard::Space);
+		me::Keyboard::trackKey(me::Keyboard::Return);
+
 		m_spawner.setDefaultGraphic(me::Graphic::makeCircle(5, 6, sf::Color(255, 255, 255, 180)));
 		m_spawner.addObject("ball", [](me::Space *space) { return ObjectFactory::makeBall(space, 30); }, me::Graphic::makeCircle(30, 8, sf::Color(255, 255, 255, 150)));
 		m_spawner.addObject("box", [](me::Space *space) { return ObjectFactory::makeBox(space, 60, 50); }, me::Graphic::makeRect(60, 50, sf::Color(255, 255, 255, 150)));

@@ -20,7 +20,7 @@ namespace tg
 	{
 		if (me::Keyboard::isKeyJustPressed(me::Keyboard::Space))
 			m_stateManager->transitionTo<StatePlaying>();
-		if (me::Keyboard::wasKeyPressed(me::Keyboard::Return))
+		if (me::Keyboard::isKeyJustPressed(me::Keyboard::Return))
 			m_space->fixedUpdate();
 	}
 
