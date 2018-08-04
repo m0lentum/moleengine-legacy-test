@@ -15,6 +15,7 @@ namespace tg
     me::GameObject* ObjectFactory::makePlayer(me::Space *space)
     {
         me::GameObject *obj = space->createObject();
+		if (!obj) return nullptr;
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
 		//rb->angularVelocity = 0.5f;
 		rb->gravityMultiplier = 0;
@@ -44,6 +45,7 @@ namespace tg
     me::GameObject* ObjectFactory::makeBox(me::Space *space, float width, float height)
     {
         me::GameObject *obj = space->createObject();
+		if (!obj) return nullptr;
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
 		//rb->isStatic = true;
         me::ColliderRect *coll = obj->addComponent<me::ColliderRect>(width, height);
@@ -56,6 +58,7 @@ namespace tg
 	me::GameObject* ObjectFactory::makeBall(me::Space *space, float radius)
 	{
 		me::GameObject *obj = space->createObject();
+		if (!obj) return nullptr;
 		me::RigidBody *rb = obj->addComponent<me::RigidBody>();
 		me::ColliderCircle *coll = obj->addComponent<me::ColliderCircle>(radius);
 		coll->linkRigidBody(rb);
@@ -67,6 +70,7 @@ namespace tg
     me::GameObject* ObjectFactory::makePolygon(me::Space *space, std::initializer_list<float> coords, sf::Color color)
     {
         me::GameObject *obj = space->createObject();
+		if (!obj) return nullptr;
         me::RigidBody *rb = obj->addComponent<me::RigidBody>();
         me::ColliderPolygon *coll = obj->addComponent<me::ColliderPolygon>(coords);
 		coll->linkRigidBody(rb);
@@ -78,15 +82,19 @@ namespace tg
 	void ObjectFactory::makeWalls(me::Space *space, float x, float y, float width, float height, float thickness)
 	{
 		me::GameObject *left = makeBox(space, thickness, height + 2 * thickness);
+		if (!left) return;
 		left->setPosition(x - 0.5f * thickness, y + 0.5f * height);
 		left->getComponent<me::RigidBody>()->isKinematic = true;
 		me::GameObject *right = makeBox(space, thickness, height + 2 * thickness);
+		if (!right) return;
 		right->setPosition(x + width + 0.5f * thickness, y + 0.5f * height);
 		right->getComponent<me::RigidBody>()->isKinematic = true;
 		me::GameObject *top = makeBox(space, width + 2 * thickness, thickness);
+		if (!top) return;
 		top->setPosition(x + 0.5f * width, y - 0.5f * thickness);
 		top->getComponent<me::RigidBody>()->isKinematic = true;
 		me::GameObject *bottom = makeBox(space, width + 2 * thickness, thickness);
+		if (!bottom) return;
 		bottom->setPosition(x + 0.5f * width, y + height + 0.5f * thickness);
 		bottom->getComponent<me::RigidBody>()->isKinematic = true;
 	}
